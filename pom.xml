@@ -9,11 +9,11 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<java-version>1.6</java-version>
+		<java-version>1.8</java-version>
 		<org.springframework-version>3.0.5.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<spring-security.version>3.1.2.RELEASE</spring-security.version>
-		<org.slf4j-version>1.5.10</org.slf4j-version>
+		<org.slf4j-version>1.6.4</org.slf4j-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -295,23 +295,28 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		<!--deep qa  -->
-			<dependency>
-    <groupId>org.apdplat</groupId>
-    <artifactId>deep-qa</artifactId>
-    <version>1.2</version>
-</dependency>
-		
+		<!--deep qa -->
+		<dependency>
+			<groupId>org.apdplat</groupId>
+			<artifactId>deep-qa</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<!-- http://mvnrepository.com/artifact/edu.stanford.nlp/stanford-corenlp -->
-<dependency>
-    <groupId>edu.stanford.nlp</groupId>
-    <artifactId>stanford-corenlp</artifactId>
-    <version>3.6.0</version>
-</dependency>
-		
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>deep-qa-web</finalName>
-		
+
 	</build>
 </project>

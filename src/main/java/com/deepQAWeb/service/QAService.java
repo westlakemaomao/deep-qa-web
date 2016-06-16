@@ -42,4 +42,8 @@ public class QAService {
 		return json;
 
 	}
+	public static void main(String args[]){
+		QAService qa= new QAService();
+		qa.getQuestionResult("中国的面积有多大？", "1");
+	}
 }
