@@ -2,6 +2,7 @@ package com.deepQAWeb.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,11 +41,15 @@ public class QaWebController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/api/ask", method = RequestMethod.GET)
-	public void spaminfo(HttpServletRequest request, HttpServletResponse response,
+	public void qaAPI(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = false, defaultValue = "", value = "q") String question,
-			@RequestParam(required = false, defaultValue = "", value = "n") String topN) throws IOException {
+			@RequestParam(required = false, defaultValue = "", value = "n") String topN,
+			@RequestParam(required = false, defaultValue = "", value = "uid") String uid) throws IOException {
 		PrintWriter out = response.getWriter(); // 获取写入对象
 		response.setContentType("application/json;charset=utf-8");
+//		request.setCharacterEncoding("utf-8");
+		LOGGER.info("ask question:"+encodeStr(question));
+		
 		String json="";
 		if(question==null||question.equals("")){
 			AnswerDomain answer= new AnswerDomain();
@@ -52,12 +57,25 @@ public class QaWebController {
 			answer.setScore(1L);
 			json="["+JSON.toJSONString(answer)+"]";
 		}else{
-			 json = qAService.getQuestionResult(question, topN);
+			 json = qAService.getQuestionResult(encodeStr(question), topN,uid);
 		}
 		
 		out.print(json);
 		out.flush();
 //		return json;
 	}
-
+	/*
+	 * spring @requestparam 传入中文乱码
+	 * 中文乱码？？？
+	 * 解决方法:http://luanxiyuan.iteye.com/blog/1849169
+	 */
+	    public static String encodeStr(String str) {  
+	        try {  
+	            return new String(str.getBytes("ISO-8859-1"), "UTF-8");  
+	        } catch (UnsupportedEncodingException e) {  
+	            e.printStackTrace();  
+	            return null;  
+	        }  
+	    }  
+	
 }

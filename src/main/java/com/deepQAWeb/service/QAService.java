@@ -23,7 +23,7 @@ public class QAService {
 /*
  * 问题及答案
  */
-	public  String getQuestionResult(String questionStr, String n) {
+	public  String getQuestionResult(String questionStr, String n,String uid) {
 		int topN = -1;
 		if (n != null && StringUtils.isNumeric(n)) {
 			topN = Integer.parseInt(n);
@@ -31,7 +31,7 @@ public class QAService {
 		Question question = null;
 		List<CandidateAnswer> candidateAnswers = null;
 		if (questionStr != null && questionStr.trim().length() > 3) {
-			question = SharedQuestionAnsweringSystem.getInstance().answerQuestion(questionStr);
+			question = SharedQuestionAnsweringSystem.getInstanceByDataSourceType(uid).answerQuestion(questionStr);
 			if (question != null) {
 				candidateAnswers = question.getAllCandidateAnswer();
 			}
@@ -44,6 +44,6 @@ public class QAService {
 	}
 	public static void main(String args[]){
 		QAService qa= new QAService();
-		qa.getQuestionResult("中国的面积有多大？", "1");
+		qa.getQuestionResult("中国的面积有多大？", "1","userid");
 	}
 }
