@@ -20,7 +20,6 @@ import com.alibaba.fastjson.JSON;
 import com.deepQAWeb.domain.AnswerDomain;
 import com.deepQAWeb.service.QAService;
 
-
 /**
  * 
  * @author yym
@@ -37,7 +36,7 @@ public class QaWebController {
 	 * 
 	 * @param q,n
 	 * @return result json
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/api/ask", method = RequestMethod.GET)
@@ -47,35 +46,74 @@ public class QaWebController {
 			@RequestParam(required = false, defaultValue = "", value = "uid") String uid) throws IOException {
 		PrintWriter out = response.getWriter(); // 获取写入对象
 		response.setContentType("application/json;charset=utf-8");
-//		request.setCharacterEncoding("utf-8");
-		LOGGER.info("ask question:"+encodeStr(question));
-		
-		String json="";
-		if(question==null||question.equals("")){
-			AnswerDomain answer= new AnswerDomain();
+		// request.setCharacterEncoding("utf-8");
+		LOGGER.info("ask question:" + encodeStr(question));
+
+		String json = "";
+		if (question == null || question.equals("")) {
+			AnswerDomain answer = new AnswerDomain();
 			answer.setAnswer("想和我聊什么呢？");
 			answer.setScore(1L);
-			json="["+JSON.toJSONString(answer)+"]";
-		}else{
-			 json = qAService.getQuestionResult(encodeStr(question), topN,uid);
+			json = "[" + JSON.toJSONString(answer) + "]";
+		} else {
+			json = qAService.getQuestionResult(encodeStr(question), topN, uid);
 		}
-		
+
 		out.print(json);
 		out.flush();
-//		return json;
+		// return json;
 	}
+
+	/**
+	 * 
+	 * @param q,n
+	 * @return result json
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/api/askByToken/", method = RequestMethod.GET)
+	public void qaAPIByToken(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(required = false, defaultValue = "", value = "appkey") String appkey,
+			@RequestParam(required = false, defaultValue = "", value = "ts") String ts,
+			@RequestParam(required = false, defaultValue = "", value = "appSecret ") String appSecret,
+			@RequestParam(required = false, defaultValue = "", value = "q") String question,
+			@RequestParam(required = false, defaultValue = "", value = "n") String topN,
+			@RequestParam(required = false, defaultValue = "", value = "uid") String uid) throws IOException {
+        
+		
+		
+		
+		PrintWriter out = response.getWriter(); // 获取写入对象
+		response.setContentType("application/json;charset=utf-8");
+		// request.setCharacterEncoding("utf-8");
+		LOGGER.info("ask question:" + encodeStr(question));
+
+		String json = "";
+		if (question == null || question.equals("")) {
+			AnswerDomain answer = new AnswerDomain();
+			answer.setAnswer("想和我聊什么呢？");
+			answer.setScore(1L);
+			json = "[" + JSON.toJSONString(answer) + "]";
+		} else {
+			json = qAService.getQuestionResult(encodeStr(question), topN, uid);
+		}
+
+		out.print(json);
+		out.flush();
+		// return json;
+	}
+
 	/*
-	 * spring @requestparam 传入中文乱码
-	 * 中文乱码？？？
+	 * spring @requestparam 传入中文乱码 中文乱码？？？
 	 * 解决方法:http://luanxiyuan.iteye.com/blog/1849169
 	 */
-	    public static String encodeStr(String str) {  
-	        try {  
-	            return new String(str.getBytes("ISO-8859-1"), "UTF-8");  
-	        } catch (UnsupportedEncodingException e) {  
-	            e.printStackTrace();  
-	            return null;  
-	        }  
-	    }  
-	
+	public static String encodeStr(String str) {
+		try {
+			return new String(str.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

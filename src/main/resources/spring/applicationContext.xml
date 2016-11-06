@@ -14,20 +14,18 @@
 	<context:annotation-config />
 	<!-- auto scan -->
 	<context:component-scan base-package="com.deepQAWeb" />
-<!-- 
+
 	<bean id="configBean"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:/spring/database.properties</value>
-			  	<value>classpath:/spring/quartz.properties</value>
+				<!-- <value>classpath:/spring/quartz.properties</value> -->
 			</list>
 		</property>
 	</bean>
 
-
 	<mvc:annotation-driven />
-
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
@@ -67,7 +65,7 @@
 			expression="execution(* com.deepQAWeb.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperations" />
 	</aop:config>
-	
+
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation">
 			<value>classpath:/ibatis/sqlMapConfig.xml</value>
@@ -76,7 +74,7 @@
 			<ref local="dataSource" />
 		</property>
 	</bean>
--->
-<!-- <import resource="classpath:/spring/Spring-Quartz.xml"/> -->	
+
+	<!-- <import resource="classpath:/spring/Spring-Quartz.xml"/> -->
 
 </beans>

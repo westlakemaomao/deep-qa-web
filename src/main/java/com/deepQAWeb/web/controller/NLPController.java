@@ -1,20 +1,13 @@
 /**
 * @author hzyuyongmao
 * @version 创建时间：2016年9月8日 下午7:28:27
-* 类说明
-*/
-package com.deepQAWeb.web.controller;
-
-/**
-* @author hzyuyongmao
-* @version 创建时间：2016年9月8日 下午4:47:03
 * uuid生成器
 */
+package com.deepQAWeb.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +28,6 @@ import com.deepQAWeb.domain.KeywordsDomain;
 import com.deepQAWeb.domain.ResponseDomain;
 import com.deepQAWeb.domain.TextClassfiy;
 import com.deepQAWeb.domain.NLPDomain;
-import com.deepQAWeb.domain.UuidResponseDataDomain;
-import com.deepQAWeb.util.UuidGeneratorUtil;
 
 import tools.nlp.articleabstract.GetArticleAbstract;
 import tools.nlp.keywords.GetArticleKeywords;
@@ -104,7 +95,6 @@ public class NLPController {
 			out.print(JSON.toJSONString(responseDomain));
 			out.flush();
 			e.printStackTrace();
-
 		}
 	}
 
