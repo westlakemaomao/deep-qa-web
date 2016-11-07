@@ -4,11 +4,13 @@
 	<select id="getTokenByUsername" parameterClass="java.lang.String"
 		resultClass="java.lang.String">
 		SELECT
-		key
+		token
 		FROM
 		user_token
 		WHERE
 		appkey = #appkey#;
 	</select>
-
+	<insert id="insertAppkey" parameterClass="com.deepQAWeb.domain.AppKeyTokenDomain">
+	 insert user_token(appkey,token) values(#appkey#,#key#)
+	</insert>
 </sqlMap>

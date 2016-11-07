@@ -11,14 +11,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.deepQAWeb.domain.AnswerDomain;
+import com.deepQAWeb.domain.QaRequestDomain;
+import com.deepQAWeb.domain.QaResponseDomain;
+import com.deepQAWeb.service.AppkeyTokenService;
 import com.deepQAWeb.service.QAService;
+
 
 /**
  * 
@@ -31,6 +37,8 @@ public class QaWebController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(QaWebController.class);
 	@Autowired
 	QAService qAService;
+	@Autowired
+	AppkeyTokenService appkeyTokenService;
 
 	/**
 	 * 
@@ -64,43 +72,26 @@ public class QaWebController {
 		// return json;
 	}
 
-	/**
-	 * 
-	 * @param q,n
-	 * @return result json
-	 * @throws IOException
+	/*
+	 * 验证获取接口
 	 */
+	@RequestMapping(value = "/api/qa-ask", method = RequestMethod.POST)
 	@ResponseBody
-	@RequestMapping(value = "/api/askByToken/", method = RequestMethod.GET)
-	public void qaAPIByToken(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(required = false, defaultValue = "", value = "appkey") String appkey,
-			@RequestParam(required = false, defaultValue = "", value = "ts") String ts,
-			@RequestParam(required = false, defaultValue = "", value = "appSecret ") String appSecret,
-			@RequestParam(required = false, defaultValue = "", value = "q") String question,
-			@RequestParam(required = false, defaultValue = "", value = "n") String topN,
-			@RequestParam(required = false, defaultValue = "", value = "uid") String uid) throws IOException {
-        
+	public void getQaAPIBytoken(HttpServletRequest request, @RequestBody JSONObject jsonObj,
+			HttpServletResponse response) throws IOException {
+		String jsonString = jsonObj.toString();
+		LOGGER.info("qa-ask:" + jsonString);
+
+		QaRequestDomain qaDomain = JSONObject.parseObject(jsonString, QaRequestDomain.class);
+
+		QaResponseDomain queryCardResponse = qAService.getQAAnswer(qaDomain);
 		
-		
-		
+		response.setCharacterEncoding("UTF-8"); // 设置编码格式
+		response.setContentType("application/json"); // 设置数据格式
 		PrintWriter out = response.getWriter(); // 获取写入对象
-		response.setContentType("application/json;charset=utf-8");
-		// request.setCharacterEncoding("utf-8");
-		LOGGER.info("ask question:" + encodeStr(question));
-
-		String json = "";
-		if (question == null || question.equals("")) {
-			AnswerDomain answer = new AnswerDomain();
-			answer.setAnswer("想和我聊什么呢？");
-			answer.setScore(1L);
-			json = "[" + JSON.toJSONString(answer) + "]";
-		} else {
-			json = qAService.getQuestionResult(encodeStr(question), topN, uid);
-		}
-
-		out.print(json);
+		out.print(JSON.toJSONString(queryCardResponse)); // 将json数据写入流中
 		out.flush();
-		// return json;
+
 	}
 
 	/*
