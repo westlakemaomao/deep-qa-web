@@ -3,7 +3,8 @@ package com.deepQAWeb.domain;
 public class BrandTestDomain {
     private String brandName;
     private String brandId;
-    private String brandInfo;
+    private int brandCode;
+    private String addDev1;
     public String getBrandName() {
         return brandName;
     }
@@ -20,12 +21,12 @@ public class BrandTestDomain {
         this.brandId = brandId;
     }
 
-    public String getBrandInfo() {
-        return brandInfo;
+    public int getBrandCode() {
+        return brandCode;
     }
 
-    public void setBrandInfo(String brandInfo) {
-        this.brandInfo = brandInfo;
+    public void setBrandCode(int brandCode) {
+        this.brandCode = brandCode;
     }
 
     @Override
@@ -33,7 +34,8 @@ public class BrandTestDomain {
         return "BrandTestDomain{" +
                 "brandName='" + brandName + '\'' +
                 ", brandId='" + brandId + '\'' +
-                ", brandInfo='" + brandInfo + '\'' +
+                ", brandCode=" + brandCode +
+                ", addDev1='" + addDev1 + '\'' +
                 '}';
     }
 }
