@@ -8,6 +8,7 @@ package com.deepQAWeb.domain;
 public class TextClassfiy {
 	private String className;
 	private float value;
+	private String codeTest;
 
 	public String getClassName() {
 		return className;
@@ -23,5 +24,13 @@ public class TextClassfiy {
 
 	public void setValue(float value) {
 		this.value = value;
+	}
+
+	public String getCodeTest() {
+		return codeTest;
+	}
+
+	public void setCodeTest(String codeTest) {
+		this.codeTest = codeTest;
 	}
 }
