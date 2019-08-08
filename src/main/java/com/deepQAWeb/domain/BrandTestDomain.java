@@ -4,6 +4,7 @@ public class BrandTestDomain {
     private String brandName;
     private String brandId;
     private int brandCode;
+    private String addDev1;
     public String getBrandName() {
         return brandName;
     }
@@ -34,6 +35,7 @@ public class BrandTestDomain {
                 "brandName='" + brandName + '\'' +
                 ", brandId='" + brandId + '\'' +
                 ", brandCode=" + brandCode +
+                ", addDev1='" + addDev1 + '\'' +
                 '}';
     }
 }
