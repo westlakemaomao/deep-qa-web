@@ -5,6 +5,7 @@ public class BrandTestDomain {
     private String brandId;
     private int brandCode;
     private String addDev1;
+    private String mergeDev1;
     public String getBrandName() {
         return brandName;
     }
@@ -29,6 +30,22 @@ public class BrandTestDomain {
         this.brandCode = brandCode;
     }
 
+    public String getAddDev1() {
+        return addDev1;
+    }
+
+    public void setAddDev1(String addDev1) {
+        this.addDev1 = addDev1;
+    }
+
+    public String getMergeDev1() {
+        return mergeDev1;
+    }
+
+    public void setMergeDev1(String mergeDev1) {
+        this.mergeDev1 = mergeDev1;
+    }
+
     @Override
     public String toString() {
         return "BrandTestDomain{" +
@@ -36,6 +53,7 @@ public class BrandTestDomain {
                 ", brandId='" + brandId + '\'' +
                 ", brandCode=" + brandCode +
                 ", addDev1='" + addDev1 + '\'' +
+                ", mergeDev1='" + mergeDev1 + '\'' +
                 '}';
     }
 }
